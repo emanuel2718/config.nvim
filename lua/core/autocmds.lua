@@ -27,6 +27,8 @@ autocmd("FileType", {
     "man",
     "notify",
     "qf",
+    "gitsigns",
+    "fugitive",
     "query",
     "spectre_panel",
     "startuptime",

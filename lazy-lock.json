@@ -9,6 +9,7 @@
   "conform.nvim": { "branch": "master", "commit": "b8f3ed3903430033f638b17f7455b8fd3d6a85b5" },
   "copilot.lua": { "branch": "master", "commit": "f7612f5af4a7d7615babf43ab1e67a2d790c13a6" },
   "fidget.nvim": { "branch": "main", "commit": "ef99df04a1c53a453602421bc0f756997edc8289" },
+  "gitsigns.nvim": { "branch": "main", "commit": "805610a9393fa231f2c2b49cb521bfa413fadb3d" },
   "gruber-darker.nvim": { "branch": "main", "commit": "a2dda61d9c1225e16951a51d6b89795b0ac35cd6" },
   "hybrid.nvim": { "branch": "master", "commit": "82d847fc6bdc1b9b4e7f34f22410989c61979081" },
   "lazy.nvim": { "branch": "main", "commit": "8f19915175395680808de529e4220da8dafc0759" },
@@ -34,5 +35,6 @@
   "telescope.nvim": { "branch": "master", "commit": "6312868392331c9c0f22725041f1ec2bef57c751" },
   "toggle-lsp-diagnostics.nvim": { "branch": "main", "commit": "afcacba44d86df4c3c9752b869e78eb838f55765" },
   "toggleterm.nvim": { "branch": "main", "commit": "066cccf48a43553a80a210eb3be89a15d789d6e6" },
-  "trouble.nvim": { "branch": "main", "commit": "a8264a65a0b894832ea642844f5b7c30112c458f" }
+  "trouble.nvim": { "branch": "main", "commit": "a8264a65a0b894832ea642844f5b7c30112c458f" },
+  "vim-fugitive": { "branch": "master", "commit": "4f59455d2388e113bd510e85b310d15b9228ca0d" }
 }
