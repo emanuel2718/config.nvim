@@ -26,3 +26,5 @@ opt.listchars = {
   nbsp = "␣",
 }
 
+-- this is a test comment
+
