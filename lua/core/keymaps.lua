@@ -31,6 +31,9 @@ map("n", "<leader>y", [["+Y]])
 -- quit
 map("n", "<leader>q", "<cmd>qa!<cr>")
 
+-- source the current file
+map("n", "<leader>s.", "<cmd>source%<cr>")
+
 -- save
 map("n", "<leader>fs", "<cmd>w!<cr>")
 
@@ -43,12 +46,12 @@ map("n", "<leader>`", "<cmd>e #<cr>")
 map("n", "<leader>x", "<cmd>source %<CR>") -- execute current file
 
 -- Toggle hlsearch if it's on, otherwise do "enter"
-map("n", "<cr>", function()
+map("n", "<Esc>", function()
   ---@diagnostic disable-next-line: undefined-field
   if vim.opt.hlsearch:get() then
     vim.cmd.nohl()
     return ""
   else
-    return "<cr>"
+    return "<Esc>"
   end
 end, { expr = true })
