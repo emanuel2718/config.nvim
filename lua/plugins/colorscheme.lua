@@ -3,12 +3,6 @@ return {
     "mellow-theme/mellow.nvim",
     config = function()
       require "plugins.config.colorscheme"
-    end,
-  },
-  {
-    "mellow-theme/mellow.nvim",
-    config = function()
-      require "plugins.config.colorscheme"
     end
   },
   {
