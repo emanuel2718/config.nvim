@@ -1,16 +1,25 @@
-local function rosePine()
-  vim.cmd [[colorscheme rose-pine]]
-  vim.cmd [[highlight TelescopeSelection guibg=blue]]
-end
-
-local function noClownFiesta()
-  vim.cmd [[colorscheme no-clown-fiesta]]
-  vim.cmd [[highlight TelescopeSelection guibg=blue]]
-  vim.cmd [[highlight PmenuSel guibg=blue guifg=white]]
-end
-
-local function gruberDarker()
-  require("gruber-darker").setup {
+return {
+  {
+    "mellow-theme/mellow.nvim",
+    config = function()
+      require "plugins.config.colorscheme"
+    end,
+  },
+  {
+    "mellow-theme/mellow.nvim",
+    config = function()
+      require "plugins.config.colorscheme"
+    end
+  },
+  {
+    "ellisonleao/gruvbox.nvim",
+    depencencies = { "rktjmp/lush.nvim" },
+  },
+  {
+    "sainnhe/gruvbox-material",
+  },
+  {
+    "blazkowolf/gruber-darker.nvim",
     opts = {
       bold = false,
       invert = {
@@ -28,18 +37,5 @@ local function gruberDarker()
       underline = false,
     },
   }
-  vim.cmd [[colorscheme gruber-darker]]
-  vim.cmd [[highlight Normal guibg=#101010]]
-end
-
-
-
-return {
-  { "kvrohit/rasmus.nvim" },
-  { "rose-pine/neovim", name = "rose-pine" },
-  { "morhetz/gruvbox" },
-  { "folke/tokyonight.nvim" },
-  { "w0ng/vim-hybrid" },
-  { "aktersnurra/no-clown-fiesta.nvim", config = noClownFiesta },
-  { "blazkowolf/gruber-darker.nvim" },
 }
+

@@ -1,3 +1,11 @@
+---@diagnostic disable-next-line: lowercase-global
+function project_files()
+  local opts = { show_untracked = true, hidden = true }
+  local ok = pcall(require("telescope.builtin").git_files, opts)
+  if not ok then
+    require("telescope.builtin").find_files(opts)
+  end
+end
 return {
   { "nvim-lua/plenary.nvim" },
   {
@@ -12,6 +20,7 @@ return {
     config = function()
       require("telescope").setup {
         defaults = {
+          selection_caret = "",
           mappings = {
             i = {
               ["<C-x>"] = false,
@@ -40,8 +49,9 @@ return {
       local map = vim.keymap.set
 
       map("n", "<space>gt", builtin.git_files)
-      map("n", "<space>gt", builtin.find_files)
+      map("n", "<space>ff", builtin.find_files)
       map("n", "<leader>.", ':lua require"telescope.builtin".find_files({ hidden = true })<CR>')
+      -- map("n", "<leader>.", project_files)
 
       map("n", "<leader>fo", builtin.oldfiles)
       map("n", "<leader>hh", builtin.help_tags)
@@ -49,7 +59,9 @@ return {
       map("n", "<leader>ss", builtin.current_buffer_fuzzy_find)
       map("n", "<leader>bi", builtin.buffers)
       map("n", "<leader>ri", builtin.resume)
-      map("n", "<leader>si", builtin.lsp_document_symbols)
+      map("n", "<leader>si", function()
+        builtin.lsp_document_symbols { ignore_symbols = { "property" } }
+      end)
 
       map("n", "<leader>/", builtin.grep_string)
 

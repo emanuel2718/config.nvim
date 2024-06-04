@@ -43,7 +43,9 @@ map("n", "<leader>o", "<cmd>q<cr>")
 -- last buffer
 map("n", "<leader>`", "<cmd>e #<cr>")
 
-map("n", "<leader>x", "<cmd>source %<CR>") -- execute current file
+-- source current file
+map("n", "<leader>s.", "<cmd>source %<CR>") -- execute current file
+
 
 -- Toggle hlsearch if it's on, otherwise do "enter"
 map("n", "<Esc>", function()

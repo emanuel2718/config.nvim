@@ -136,7 +136,9 @@ return {
           local client = assert(vim.lsp.get_client_by_id(args.data.client_id), "must have valid client")
 
           vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
-          vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
+          -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
+          vim.keymap.set("n", "gd", ':lua require"telescope.builtin".lsp_definitions()<CR>', { buffer = 0 })
+
           vim.keymap.set("n", "gh", vim.lsp.buf.references, { buffer = 0 })
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = 0 })
           vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
@@ -169,9 +171,9 @@ return {
           lua = { "stylua" },
           rust = { "rust_analyzer" },
           python = { "isort", "black" },
-          typescript = { { "prettier" } },
-          javascript = { { "prettier" } },
-          vue = { { "prettier" } },
+          typescript = { "prettier" },
+          javascript = { "prettier"},
+          vue = { "prettier" },
         },
       }
 
