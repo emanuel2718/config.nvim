@@ -27,7 +27,7 @@ local colorGruvbox = function()
   vim.g.gruvbox_italic = 0
   vim.g.gruvbox_bold = 1
   vim.g.gruvbox_termcolors = 256
-  vim.g.gruvbox_contrast_dark = "medium"
+  vim.g.gruvbox_contrast_dark = "hard"
   vim.g.gruvbox_invert_selection = 0
 end
 
@@ -46,5 +46,5 @@ local highlight = function()
 end
 
 -- colorscheme
-colorGruvboxMaterial()
+colorGruvbox()
 highlight()
