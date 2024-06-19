@@ -9,6 +9,7 @@
   "copilot.lua": { "branch": "master", "commit": "f7612f5af4a7d7615babf43ab1e67a2d790c13a6" },
   "fidget.nvim": { "branch": "main", "commit": "ef99df04a1c53a453602421bc0f756997edc8289" },
   "gruber-darker.nvim": { "branch": "main", "commit": "a2dda61d9c1225e16951a51d6b89795b0ac35cd6" },
+  "gruvbox-community": { "branch": "master", "commit": "143a3b8babcfd2bce6c99d6ba496942647c3e30b" },
   "gruvbox-material": { "branch": "master", "commit": "905a41c86dbfed42f89c13c36f0e3407e9318910" },
   "gruvbox.nvim": { "branch": "main", "commit": "f99a08abc5ab0b9b5b0e7a33211a439155c60a61" },
   "lazy.nvim": { "branch": "main", "commit": "24fa2a97085ca8a7220b5b078916f81e316036fd" },

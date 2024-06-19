@@ -3,12 +3,16 @@ return {
     "mellow-theme/mellow.nvim",
     config = function()
       require "plugins.config.colorscheme"
-    end
+    end,
   },
   {
-    "ellisonleao/gruvbox.nvim",
-    depencencies = { "rktjmp/lush.nvim" },
+    "gruvbox-community/gruvbox",
+    name = "gruvbox-community"
   },
+  -- {
+  --   "ellisonleao/gruvbox.nvim",
+  --   depencencies = { "rktjmp/lush.nvim" },
+  -- },
   {
     "sainnhe/gruvbox-material",
   },
@@ -30,6 +34,5 @@ return {
       undercurl = false,
       underline = false,
     },
-  }
+  },
 }
-

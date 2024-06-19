@@ -45,6 +45,12 @@ local highlight = function()
   vim.cmd [[highlight TelescopeSelection guibg=blue]]
 end
 
+local colorGruvboxCommunity = function()
+  vim.cmd [[colorscheme gruvbox]]
+  vim.cmd [[ highlight LineNr guibg=NONE ctermbg=NONE ]]
+  vim.cmd [[ highlight SignColumn guibg=NONE ctermbg=NONE ]]
+end
+
 -- colorscheme
-colorGruvbox()
+colorGruvboxCommunity()
 highlight()
