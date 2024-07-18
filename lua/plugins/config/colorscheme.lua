@@ -7,6 +7,10 @@ end
 
 local colorHybrid = function()
   vim.cmd [[colorscheme hybrid]]
+  vim.api.nvim_set_hl(0, "Normal", { bg = "black" })
+  vim.api.nvim_set_hl(0, "NormalNC", { bg = "black" })
+  vim.api.nvim_set_hl(0, "@markup.heading", { bold = true })
+  vim.api.nvim_set_hl(0, "@markup.raw.block", { fg = nil })
 end
 
 local colorBlueMoon = function()
@@ -19,7 +23,7 @@ end
 
 local colorGruberDarker = function()
   vim.cmd [[colorscheme gruber-darker]]
-  vim.cmd [[highlight Normal guibg=#101010]]
+  -- vim.cmd [[highlight Normal guibg=#101010]]
 end
 
 local colorGruvbox = function()
@@ -33,7 +37,7 @@ end
 
 local colorGruvboxMaterial = function()
   vim.g.gruvbox_material_enable_italic = false
-  vim.g.gruvbox_material_background = "hard"
+  vim.g.gruvbox_material_background = "soft"
   vim.cmd.colorscheme "gruvbox-material"
 end
 
@@ -51,6 +55,11 @@ local colorGruvboxCommunity = function()
   vim.cmd [[ highlight SignColumn guibg=NONE ctermbg=NONE ]]
 end
 
+
+
 -- colorscheme
-colorGruvboxCommunity()
+-- colorGruvboxCommunity()
+-- colorGruvboxMaterial()
+-- colorGruberDarker()
+colorHybrid()
 highlight()
