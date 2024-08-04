@@ -50,7 +50,7 @@ return {
 				bold = true,
 				italic = {
 					strings = false,
-					emphasis = true,
+					emphasis = false,
 					comments = true,
 					folds = true,
 				},

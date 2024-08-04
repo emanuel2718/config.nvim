@@ -7,6 +7,7 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
+      "JoosepAlviste/nvim-ts-context-commentstring",
       "folke/trouble.nvim",
 
       { "j-hui/fidget.nvim", opts = {} },
@@ -130,41 +131,6 @@ return {
         lua = true,
       }
 
-      vim.api.nvim_create_autocmd("LspAttach", {
-        callback = function(args)
-          local bufnr = args.buf
-          local client = assert(vim.lsp.get_client_by_id(args.data.client_id), "must have valid client")
-
-          vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
-          -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
-          vim.keymap.set("n", "gd", ':lua require"telescope.builtin".lsp_definitions()<CR>', { buffer = 0 })
-
-          vim.keymap.set("n", "gh", vim.lsp.buf.references, { buffer = 0 })
-          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = 0 })
-          vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
-          vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
-          vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = 0 })
-          vim.keymap.set("n", "gl", function()
-            vim.diagnostic.open_float {}
-          end)
-
-          vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, { buffer = 0 })
-          vim.keymap.set("n", "<C-c>", vim.lsp.buf.code_action, { buffer = 0 })
-          vim.keymap.set("n", "<leader>j", "<cmd>lua vim.diagnostic.goto_next()<cr>", { buffer = 0 })
-          vim.keymap.set("n", "<leader>k", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { buffer = 0 })
-          vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<cr>")
-          vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>")
-          vim.keymap.set("n", "<leader>lf", function()
-            require("conform").format { bufnr = bufnr, lsp_fallback = true, quiet = true }
-          end)
-
-          local filetype = vim.bo[bufnr].filetype
-          if disable_semantic_tokens[filetype] then
-            client.server_capabilities.semanticTokensProvider = nil
-          end
-        end,
-      })
-
       -- Autoformatting Setup
       require("conform").setup {
         formatters_by_ft = {
@@ -182,6 +148,49 @@ return {
           vue = { "prettier" },
         },
       }
+
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local fzf = require "fzf-lua"
+          local bufnr = args.buf
+          local client = assert(vim.lsp.get_client_by_id(args.data.client_id), "must have valid client")
+
+          vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
+          -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
+          -- vim.keymap.set("n", "gd", ':lua require"telescope.builtin".lsp_definitions()<CR>', { buffer = 0 })
+          vim.keymap.set("n", "gd", fzf.lsp_definitions, { buffer = 0 })
+          vim.keymap.set("n", "si", fzf.lsp_document_symbols, { buffer = 0 })
+
+          vim.keymap.set("n", "gh", fzf.lsp_references, { buffer = 0 })
+          -- vim.keymap.set("n", "gh", vim.lsp.buf.references, { buffer = 0 })
+          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = 0 })
+          vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
+          vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
+          vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = 0 })
+          vim.keymap.set("n", "gl", function()
+            vim.diagnostic.open_float {}
+          end)
+
+          vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, { buffer = 0 })
+          -- vim.keymap.set("n", "<C-c>", vim.lsp.buf.code_action, { buffer = 0 })
+          vim.keymap.set("n", "<C-c>", fzf.lsp_code_actions, { buffer = 0 })
+          vim.keymap.set("n", "<leader>j", "<cmd>lua vim.diagnostic.goto_next()<cr>", { buffer = 0 })
+          vim.keymap.set("n", "<leader>k", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { buffer = 0 })
+          vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<cr>")
+          vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>")
+          vim.keymap.set("n", "<leader>lf", function()
+            require("conform").format { lsp_format = "fallback", quiet = false }
+          end)
+          -- vim.keymap.set("n", "<leader>lf", function()
+          --   require("conform").format { bufnr = bufnr, lsp_fallback = true, quiet = true }
+          -- end)
+
+          local filetype = vim.bo[bufnr].filetype
+          if disable_semantic_tokens[filetype] then
+            client.server_capabilities.semanticTokensProvider = nil
+          end
+        end,
+      })
 
       -- Autoformatting
       -- vim.api.nvim_create_autocmd("BufWritePre", {
