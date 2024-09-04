@@ -178,56 +178,8 @@ require("lazy").setup {
       },
     },
   },
-  {
-    "RRethy/base16-nvim",
-  },
-  { "EdenEast/nightfox.nvim" },
-  { "shaunsingh/nord.nvim" },
-  { -- gruvbox
-    "ellisonleao/gruvbox.nvim",
-    dependencies = { "rktjmp/lush.nvim" },
-  },
-  { -- hybrid
-    "HoNamDuong/hybrid.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-    config = function()
-      -- Default options:
-      require("hybrid").setup {
-        terminal_colors = true,
-        undercurl = true,
-        underline = true,
-        bold = true,
-        italic = {
-          strings = false,
-          emphasis = false,
-          comments = true,
-          folds = true,
-        },
-        strikethrough = true,
-        inverse = true,
-        transparent = false,
-        overrides = function(hl, c)
-          local background = "#000000"
-          c.bg = background
-          hl.TelescopeNormal = {
-            fg = c.fg,
-            bg = background,
-          }
-          hl.TelescopeBorder = {
-            fg = c.fg,
-            bg = c.bg,
-          }
-          hl.TelescopeTitle = {
-            fg = c.fg_hard,
-            bg = c.bg,
-            bold = true,
-          }
-        end,
-      }
-    end,
-  },
+  -- theme
+  { "RRethy/base16-nvim" },
   { -- colorizer
     "NvChad/nvim-colorizer.lua",
     config = function()
@@ -524,6 +476,10 @@ require("lazy").setup {
             require("conform").format { lsp_format = "fallback", quiet = false }
           end)
 
+          -- Toggle LSP Diagnostics
+          require("toggle_lsp_diagnostics").init { start_on = true }
+          map("n", "<leader>dd", "<cmd>ToggleDiag<cr>")
+
           local filetype = vim.bo[bufnr].filetype
           if disable_semantic_tokens[filetype] then
             client.server_capabilities.semanticTokensProvider = nil
@@ -531,14 +487,7 @@ require("lazy").setup {
         end,
       })
 
-      -- Toggle LSP Diagnostics
-      require("toggle_lsp_diagnostics").init { start_on = true }
-      map("n", "<leader>dd", "<cmd>ToggleDiag<cr>")
 
-      -- local trouble = require "trouble"
-      -- map("n", "<leader>d.", function()
-      --   trouble.toggle "document_diagnostics"
-      -- end)
     end,
   },
   { -- cmp
@@ -590,23 +539,6 @@ require("lazy").setup {
     end,
   },
 }
-
-local hybrid = function()
-  vim.cmd [[colorscheme hybrid]]
-  vim.api.nvim_set_hl(0, "Normal", { bg = "black" })
-  vim.api.nvim_set_hl(0, "NormalNC", { bg = "black" })
-  vim.api.nvim_set_hl(0, "@markup.heading", { bold = true })
-  vim.api.nvim_set_hl(0, "@markup.raw.block", { fg = nil })
-end
-
-local carbonfox = function()
-  vim.cmd [[colorscheme carbonfox]]
-end
-
-local nord = function()
-  vim.cmd [[colorscheme nord]]
-  vim.g.nord_italic = false
-end
 
 local base16 = function()
   vim.cmd [[colorscheme base16-tomorrow-night]]
