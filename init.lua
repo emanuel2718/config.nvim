@@ -81,6 +81,9 @@ map("n", "<leader>o", "<cmd>q<cr>")
 -- last buffer
 map("n", "<leader>`", "<cmd>e #<cr>")
 
+-- send nvim to foreground
+map('n', '<C-g>', '<C-z>')
+
 -- edit config
 map("n", "<leader>sn", function()
   vim.cmd("edit " .. vim.fn.stdpath "config" .. "/init.lua")
