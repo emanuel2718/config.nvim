@@ -6,6 +6,17 @@ return {
     local map = vim.keymap.set
     local fzf = require 'fzf-lua'
     fzf.setup {
+      winopts = {
+        -- preview = {
+        --   hidden = "hidden",
+        -- },
+        height = 0.5,
+        width = 1,
+        row = 1,
+        col = 0.5,
+        border = "rounded",
+        winblend = 10,
+      },
     }
 
     map('n', '<leader>.', fzf.files)
