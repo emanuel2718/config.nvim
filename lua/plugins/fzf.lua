@@ -24,6 +24,7 @@ return {
     map('n', '<leader>fo', fzf.oldfiles)
     map('n', '<leader><leader>', fzf.buffers)
     map('n', '<leader>sp', fzf.live_grep_native)
+    map('n', '<leader>s.', fzf.grep_cWORD)
     map('n', '<leader>r.', fzf.resume)
     map('n', '<leader>ht', fzf.colorschemes)
     map('n', '<leader>hh', fzf.helptags)

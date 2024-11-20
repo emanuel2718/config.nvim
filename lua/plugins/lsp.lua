@@ -136,7 +136,6 @@ return { -- LSP
 
         vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
         map("n", "gd", fzf.lsp_definitions, { buffer = 0 })
-        map("n", "si", fzf.lsp_document_symbols, { buffer = 0 })
 
         map("n", "gh", fzf.lsp_references, { buffer = 0 })
         map("n", "gD", vim.lsp.buf.declaration, { buffer = 0 })
@@ -147,6 +146,7 @@ return { -- LSP
           vim.diagnostic.open_float {}
         end)
 
+        map("n", "<leader>si", fzf.lsp_document_symbols, { buffer = 0 })
         map("n", "<leader>d.", fzf.diagnostics_document, { buffer = 0 })
         map("n", "<space>rn", vim.lsp.buf.rename, { buffer = 0 })
         map("n", "<C-c>", fzf.lsp_code_actions, { buffer = 0 })
