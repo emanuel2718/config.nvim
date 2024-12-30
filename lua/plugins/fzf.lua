@@ -20,7 +20,6 @@ return {
     }
 
     map('n', '<leader>.', fzf.files)
-    map('n', '<leader>fo', fzf.git_files)
     map('n', '<leader>fo', fzf.oldfiles)
     map('n', '<leader><leader>', fzf.buffers)
     map('n', '<leader>sp', fzf.live_grep_native)
