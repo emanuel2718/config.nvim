@@ -5,7 +5,8 @@ return {
     config = function()
       require("blink.cmp").setup {
         completion = {
-          menu = { border = "single", auto_show = false },
+          menu = { border = "single", auto_show = true },
+          documentation = { auto_show = true, auto_show_delay_ms = 1000 }
         },
         sources = {
           -- disable all snippets
