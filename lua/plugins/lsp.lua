@@ -3,12 +3,13 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "saghen/blink.cmp",
+      "stevearc/conform.nvim",
       "b0o/SchemaStore.nvim",
       { "williamboman/mason.nvim", config = true },
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
-      { "j-hui/fidget.nvim",       opts = {} },
+      { "j-hui/fidget.nvim", opts = {} },
       {
         "folke/lazydev.nvim",
         opts = {
@@ -123,6 +124,26 @@ return {
 
       require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 
+      local conform = require "conform"
+      conform.setup {
+        formatters_by_ft = {
+          lua = { "stylua" },
+          rust = { "rust_analyzer" },
+          python = { "isort", "black" },
+          go = { "gofmt" },
+          typescript = { "prettier" },
+          javascript = { "prettier" },
+          javascriptreact = { "prettier" },
+          typescriptreact = { "prettier" },
+          html = { "prettier" },
+          css = { "prettier" },
+          yaml = { "prettier" },
+          vue = { "prettier" },
+        },
+      }
+
+      local auto_format = true
+
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           local c = vim.lsp.get_client_by_id(args.data.client_id)
@@ -134,7 +155,10 @@ return {
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = args.buf,
             callback = function()
-              vim.lsp.buf.format { bufnr = args.buf, id = c.id }
+              if auto_format then
+                conform.format { lsp_format = "fallback", quiet = false }
+              end
+              -- vim.lsp.buf.format { bufnr = args.buf, id = c.id }
             end,
           })
 
@@ -147,6 +171,19 @@ return {
           vim.keymap.set("n", "gD", fzf.lsp_declarations, opts)
           vim.keymap.set("n", "<leader>ll", fzf.lsp_document_symbols, opts)
           vim.keymap.set("n", "<leader>ls", fzf.lsp_workspace_symbols, opts)
+          vim.keymap.set("n", "<leader>ff", function()
+            if auto_format then
+              auto_format = false
+              print "Toggling auto format OFF!"
+            else
+              print "Toggling auto format ON!"
+              auto_format = true
+            end
+            -- auto_format = not auto_format -- toggle it
+          end, opts)
+          vim.keymap.set({ "n", "v" }, "<leader>lf", function()
+            conform.format { lsp_format = "fallback", quiet = false }
+          end)
 
           vim.keymap.set("i", "<C-k>", function()
             vim.lsp.buf.signature_help {}

@@ -43,6 +43,14 @@ map("n", "<leader>`", "<cmd>e #<cr>")
 -- send nvim to the foreground
 map("n", "<C-g>", "<C-z>")
 
+-- source nvim file/line
+map("n", "<leader><leader>x", "<cmd>source %<CR>")
+map("n", "<leader>x", ":.lua<CR>")
+map("v", "<leader>x", ":lua<CR>")
+
+-- highlight every line in the buffer
+map("n", "<C-b'>", "VggoG")
+
 map("n", "<Esc>", function()
   ---@diagnostic disable-next-line: undefined-field
   if vim.opt.hlsearch:get() then
@@ -52,4 +60,3 @@ map("n", "<Esc>", function()
     return "<Esc>"
   end
 end, { expr = true })
-
